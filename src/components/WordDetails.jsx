@@ -1,38 +1,40 @@
 import React from 'react'
 
-export default function WordDetails({ word, description, pronounciation, usage , font}) {
-    return (
-        <div style={{ marginTop:"15px"}} className={font}>
-            <h1>{word}</h1>
-            <h5 style={{color:"#AA5CE7"}}>{pronounciation}</h5>
+export default function WordDetails({ meanings, word, font, phonetic }) {
+  console.log("m" + meanings)
+  console.log(word)
 
 
-            <p  style={{ marginTop:"15px"}}>Meaning</p>
-            <ol style={{ paddingLeft: "20px", marginTop:"15px"}}>
-                <li style={{ marginBottom: "10px" , borderBottom:"1px solid #ddd", padding:"10px"}}>
-                   <b> {description}</b>
-                    <div style={{ display: "flex" }}>
-                        {/* <h4 style={{ marginRight: "5px" }}>Usage : </h4> */}
-                        <p>"{usage}"</p>
-                    </div>
+
+  return (
+
+    <div className={font}>
+      <h1 style={{ color: "#AA5CE7" }}>{word}</h1>
+      <h5>{phonetic}</h5>
+
+
+      <p style={{ marginTop: "15px" }}>Meaning</p>
+      <ol style={{ paddingLeft: "20px" }}>
+        {meanings && meanings.map((meaning, meaningIndex) => (
+
+          <li key={meaningIndex} style={{ margin: "5px", paddingBottom: "5px" }}>
+            <h4>{meaning.partOfSpeech}</h4>
+            <ul style={{
+              paddingLeft: "20px",
+              lineHeight: "26px",
+              fontWeight: "500",
+              color: "#444"
+            }}>
+              {meaning.definitions && meaning.definitions.map((definition, defIndex) => (
+                <li key={`${meaningIndex}-${defIndex}`} >
+
+                  <p>{definition.definition}</p>
                 </li>
-                <li style={{ marginBottom: "10px" , borderBottom:"1px solid #ddd", padding:"10px"}}>
-                   <b> {description}</b>
-                    <div style={{ display: "flex" }}>
-                        {/* <h4 style={{ marginRight: "5px" }}>Usage : </h4> */}
-                        <p>"{usage}"</p>
-                    </div>
-                </li>
-                <li style={{ marginBottom: "10px", borderBottom:"1px solid #ddd", padding:"10px"}}>
-                   <b> {description}</b>
-                   <div style={{ display: "flex" }}>
-                        {/* <h4 style={{ marginRight: "5px" }}>Usage : </h4> */}
-                        <p>"{usage}"</p>
-                    </div>
-                </li>
-            </ol>
-
-
-        </div>
-    )
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ol>
+    </div>
+  )
 }
