@@ -1,4 +1,4 @@
-import { faBook, faMoon, faSun, faSunPlantWilt } from '@fortawesome/free-solid-svg-icons'
+import { faBook, faMoon, faSearch, faSun, faSunPlantWilt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 
@@ -17,7 +17,8 @@ export default function Navbar({changeTheme,changeFont, isDarkmode, font}) {
       <input value="" type="checkbox" />
       <img src="mode.jpg" alt="" />
       </label> */}
-<input type="checkbox" id="switch" value={isDarkmode} onChange={changeTheme} checked={isDarkmode} /><label for="switch">Toggle {isDarkmode ? <FontAwesomeIcon icon={faMoon} style={{fontSize:"20px"}}/> : <FontAwesomeIcon icon={faSunPlantWilt} style={{fontSize:"20px"}}/> }</label>
+<input type="checkbox" id="switch" value={isDarkmode} onChange={changeTheme} checked={isDarkmode} /><label  className="modes" for="switch"> </label>
+{isDarkmode ? <FontAwesomeIcon icon={faMoon} style={{fontSize:"20px"}}/> : <FontAwesomeIcon icon={faSun} style={{fontSize:"20px", color:"#808080"}}/> }
     </div>
   </nav>
   )
