@@ -4,18 +4,18 @@ input[type=checkbox]{
 	visibility: hidden;
 }
 
-label {
+label.modes {
 	cursor: pointer;
 	text-indent: -9999px;
   width: 45px;
   height: 25px;
-	background: grey;
+	background: rgba(14, 212, 116, 0.569);
 	display: block;
 	border-radius: 100px;
 	position: relative;
 }
 
-label:after {
+label.modes:after {
 	content: '';
 	position: absolute;
 	top: 5px;
@@ -27,11 +27,11 @@ label:after {
 	transition: 0.3s;
 }
 
-input:checked + label {
+input:checked + label.modes {
 	background: #AA5CE7;
 }
 
-input:checked + label:after {
+input:checked + label.modes:after {
 	left: calc(100% - 5px);
 	transform: translateX(-100%);
 }
@@ -46,7 +46,9 @@ input:checked + label:after {
 	justify-content: center;
 	align-items: center;
 */
-	height: 100vh; 
+	/* height: 100vh;  */
+
+	min-height: 100vh;
 
 }
 
@@ -78,3 +80,25 @@ input:checked + label:after {
     background-color: #5a5a5a;
 	color:#fff;
 }
+
+.darkmode ul li{
+	color: #d3d3d3;
+}
+
+.darkmode ::-webkit-scrollbar-track {
+  background: #3c3c3c;
+  border-radius: 20px;
+}
+
+/* Handle */
+.darkmode ::-webkit-scrollbar-thumb {
+  background: #777777;
+  border-radius: 20px;
+  width: 8px;
+}
+
+.darkmode ::-webkit-scrollbar-thumb:hover {
+	/* background: #555; */
+	background: #AA5CE7;;
+	cursor:pointer ;
+  }
