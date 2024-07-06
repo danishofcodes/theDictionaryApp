@@ -87,3 +87,33 @@ cursor: pointer;
   font-size: 14px;
 
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #dfdfdf;
+  border-radius: 20px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #b1b1b1;
+  border-radius: 20px;
+  width: 8px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  /* background: #555; */
+  background: #AA5CE7;;
+  cursor:pointer ;
+}
+
+.modes{
+  margin-right: 5px;
+}
