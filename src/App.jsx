@@ -64,7 +64,7 @@ function App() {
           return(
             <WordDetails font={font} word={item.word} phonetic={item.phonetic} meanings={item.meanings}/>
           )
-        }) : <h3 style={{textAlign:"center", paddingTop:"20px", color:"#6b6b6b"}}>Search a word!</h3>}
+        }) : <h3 style={{textAlign:"center", paddingTop:"20px", color:"#6b6b6b", fontFamily:"monospace"}}>Search a word! :)</h3>}
 </div>
      
       </div>
