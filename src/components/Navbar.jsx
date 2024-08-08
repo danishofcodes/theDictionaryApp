@@ -6,7 +6,7 @@ export default function Navbar({changeTheme,changeFont, isDarkmode, font}) {
     
   return (
     <nav  className={isDarkmode ? 'darkmode' : 'lightmode'}>
-    <div style={{display:"flex", alignItems:"center"}}><FontAwesomeIcon icon={faBook} style={{fontSize:"20px", marginRight:"10px"}}/> <span><b>theDictionaryApp</b></span></div>
+    <div style={{display:"flex", alignItems:"center"}}><FontAwesomeIcon icon={faBook} style={{fontSize:"14px", marginRight:"10px"}}/> <span><b>DictionaryApp</b></span></div>
     <div style={{display:"flex", alignItems:"center"}}>
       <select value={font} onChange={changeFont}>
         <option value="serif">serif</option>

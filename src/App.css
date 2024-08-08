@@ -114,6 +114,17 @@ cursor: pointer;
   cursor:pointer ;
 }
 
+label.modes {
+  cursor: pointer;
+  text-indent: -9999px;
+  width: 45px;
+  height: 25px;
+  background: rgba(14, 212, 116, 0.569);
+  display: block;
+  border-radius: 100px;
+  position: relative;
+}
+
 .modes{
   margin-right: 5px;
 }
