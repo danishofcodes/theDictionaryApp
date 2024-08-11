@@ -10,63 +10,82 @@ import WordDetails from './components/WordDetails'
 
 function App() {
   const [isDarkmode, setIsDarkmode] = useState(false)
-   const [font, setFont] = useState("montserrat")
-   const [qword, setQWord] = useState("");
-   const [wordMeaning, setWordmeaning] = useState([{}]);
+  const [font, setFont] = useState("montserrat")
+  const [qword, setQWord] = useState("");
+  const [wordMeaning, setWordmeaning] = useState([{}]);
 
-  
-   const toggleTheme = () => {
+
+  const toggleTheme = () => {
     setIsDarkmode(!isDarkmode); // Simplified state toggle
   };
 
-  const searchWord= (e)=>{
+  const onSearchWordChange = (e) => {
     let val = e.target.value
+    if (val == '') {
+      setWordmeaning([{}])
+    }
     setQWord(val)
-    
+
   }
   console.log(qword)
 
-  useEffect(()=>{
-    async function getData() {
-      const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${qword}`;
-      try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error(`Response status: ${response.status}`);
-        }
-    
-        const json = await response.json();
-        console.log(json);
-        setWordmeaning(json)
-      } catch (error) {
-        console.error(error.message);
+  const handleSearch = async () => {
+    if (qword.trim() === "") return; // Prevent empty searches
+    const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${qword}`;
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
       }
+
+      const json = await response.json();
+      console.log(json);
+      setWordmeaning(json);
+    } catch (error) {
+      console.error(error.message);
     }
-    getData()
-  },[qword])
-  
-  const changeFont =(e) =>{
-        const value = e.target.value;
-        console.log(value)
-        setFont(value)
+  };
+
+
+  // useEffect(()=>{
+  //   async function getData() {
+  //     const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${qword}`;
+  //     try {
+  //       const response = await fetch(url);
+  //       if (!response.ok) {
+  //         throw new Error(`Response status: ${response.status}`);
+  //       }
+
+  //       const json = await response.json();
+  //       console.log(json);
+  //       setWordmeaning(json)
+  //     } catch (error) {
+  //       console.error(error.message);
+  //     }
+  //   }
+  //   getData()
+  // },[qword])
+
+  const changeFont = (e) => {
+    const value = e.target.value;
+    console.log(value)
+    setFont(value)
   }
 
   return (
     <div className={`hfull ${isDarkmode ? 'darkmode' : 'lightmode'}`}>
-      <Navbar changeTheme={toggleTheme} changeFont={changeFont} isDarkmode={isDarkmode} font={font}/>
+      <Navbar changeTheme={toggleTheme} changeFont={changeFont} isDarkmode={isDarkmode} font={font} />
       <div className='container'>
-        <Searchbar searchWord={searchWord}  word={qword}/>
-        
+        <Searchbar onSearchWordChange={onSearchWordChange} word={qword} handleSearch={handleSearch} />
+        {qword ?(<div style={{ marginTop: "50px", overflow: "auto",  height: "calc(100vh - 250px)", padding: "10px"  }}>
+            {wordMeaning ? wordMeaning.map((item) => { return (  <WordDetails font={font} word={item.word} phonetic={item.phonetic} meanings={item.meanings} />)}) 
+            : <h3 style={{ textAlign: "center", paddingTop: "20px", color: "#6b6b6b", fontFamily: "monospace" }}>Seeeeearching.....</h3>}
+          </div>)
 
-<div style={{ marginTop:"50px",overflow:"auto",
-          height: "calc(100vh - 250px)", padding:"10px"}}>
-   {qword ? wordMeaning.map((item)=>{
-          return(
-            <WordDetails font={font} word={item.word} phonetic={item.phonetic} meanings={item.meanings}/>
-          )
-        }) : <h3 style={{textAlign:"center", paddingTop:"20px", color:"#6b6b6b", fontFamily:"monospace"}}>Search a word! :)</h3>}
-</div>
-     
+          : <h3 style={{ textAlign: "center", paddingTop: "20px", color: "#6b6b6b", fontFamily: "monospace" }}>Search Something! :).....</h3>}
+
+
+
       </div>
     </div>
   )

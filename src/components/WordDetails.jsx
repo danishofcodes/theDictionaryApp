@@ -13,7 +13,6 @@ export default function WordDetails({ meanings, word, font, phonetic }) {
       <h5>{phonetic}</h5>
 
 
-      <p style={{ marginTop: "15px" }}>Meaning</p>
       <ol style={{ paddingLeft: "20px" }}>
         {meanings && meanings.map((meaning, meaningIndex) => (
 
