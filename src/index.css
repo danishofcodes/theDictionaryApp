@@ -133,3 +133,8 @@ input:checked + label.modes:after {
   .search-button:hover {
 	background-color: #353535; /* Darker shade on hover */
   }
+.oopsErr{
+  .font-size: 18px;
+  text-align: center;
+  font-weight: 600;
+  color: #838383;}
