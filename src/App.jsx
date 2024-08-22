@@ -13,8 +13,10 @@ function App() {
   const [font, setFont] = useState("montserrat")
   const [qword, setQWord] = useState("");
   const [wordMeaning, setWordmeaning] = useState([{}]);
+  const [loading, setLoading] = useState(false)
+  const [wordFound, setWordFound] = useState(true);
 
-
+  // console.log(responseComplete)
   const toggleTheme = () => {
     setIsDarkmode(!isDarkmode); // Simplified state toggle
   };
@@ -31,18 +33,29 @@ function App() {
 
   const handleSearch = async () => {
     if (qword.trim() === "") return; // Prevent empty searches
+    // I did this basically to keep track when Im getting data as a response to populate, or else Ill show a loader
     const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${qword}`;
+    setLoading(true);
+
     try {
       const response = await fetch(url);
+
       if (!response.ok) {
         throw new Error(`Response status: ${response.status}`);
-      }
+      } else {
 
-      const json = await response.json();
-      console.log(json);
-      setWordmeaning(json);
+        const json = await response.json();
+        console.log(json);
+        setWordmeaning(json);
+        setWordFound(true)
+      }
     } catch (error) {
       console.error(error.message);
+      setWordFound(false)
+    } finally {
+      setLoading(false);
+
+
     }
   };
 
@@ -77,18 +90,25 @@ function App() {
       <Navbar changeTheme={toggleTheme} changeFont={changeFont} isDarkmode={isDarkmode} font={font} />
       <div className='container'>
         <Searchbar onSearchWordChange={onSearchWordChange} word={qword} handleSearch={handleSearch} />
-        {qword ?(<div style={{ marginTop: "50px", overflow: "auto",  height: "calc(100vh - 250px)", padding: "10px"  }}>
-            {wordMeaning ? wordMeaning.map((item) => { return (  <WordDetails font={font} word={item.word} phonetic={item.phonetic} meanings={item.meanings} />)}) 
-            : <h3 style={{ textAlign: "center", paddingTop: "20px", color: "#6b6b6b", fontFamily: "monospace" }}>Seeeeearching.....</h3>}
-          </div>)
 
-          : <h3 style={{ textAlign: "center", paddingTop: "20px", color: "#6b6b6b", fontFamily: "monospace" }}>Search Something! :).....</h3>}
+        <section style={{marginTop: "50px"}}>
+          {!loading ? <div style={{ marginTop: "50px", overflow: "auto", height: "calc(100vh - 250px)", padding: "10px" }}>
 
-
-
+            {wordMeaning.map((item, index) => {
+              return (<WordDetails key={index} font={font}
+                wordFound={wordFound}
+                word={item.word}
+                phonetic={item.phonetic}
+                meanings={item.meanings} />)
+            })}
+          </div> : <div className='loaderSec'><div className="lds-ripple"><div></div></div></div>}
+        </section>
       </div>
+
+
+
     </div>
   )
 }
 
-export default App
+export default App;
