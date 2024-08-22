@@ -1,14 +1,15 @@
 import React from 'react'
 
-export default function WordDetails({ meanings, word, font, phonetic }) {
+export default function WordDetails({ meanings, word, font, phonetic,  wordFound}) {
   console.log("m" + meanings)
-  console.log(word)
+  console.log("oo",word)
 
+ console.log("word found, "+wordFound)
 
-
-  return (
-
-    <div className={font}>
+  return (<>
+   {/* {loadingComplete ?  ( */}
+    <div> {wordFound ?
+      <div className={font}>
       <h1 style={{ color: "#AA5CE7" }}>{word}</h1>
       <h5>{phonetic}</h5>
 
@@ -35,5 +36,9 @@ export default function WordDetails({ meanings, word, font, phonetic }) {
         ))}
       </ol>
     </div>
+      :<div className='oopsErr'>Opps coudnt find that word!</div> }
+   </div>
+    {/* :<div className='loaderSec'><div class="lds-ripple"><div></div></div></div> } */}
+   </>
   )
 }
