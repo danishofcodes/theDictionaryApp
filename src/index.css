@@ -137,4 +137,5 @@ input:checked + label.modes:after {
   font-size: 18px;
   text-align: center;
   font-weight: 600;
-  color: #838383;}
+  color: #838383;
+}
